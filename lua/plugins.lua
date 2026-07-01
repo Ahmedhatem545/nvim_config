@@ -24,4 +24,6 @@ add("plugins.lualine")
 add("plugins.non-ls")
 add("plugins.autotag")
 add("plugins.autoclose")
+add("plugins.indent-blankline")
+add("plugins.melange")
 return plugins

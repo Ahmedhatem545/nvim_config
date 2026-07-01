@@ -3,11 +3,11 @@ return {
    lazy = false,
    priority = 1000,
    config = function()
-      -- 1. Load the colorscheme first
+      -- Load the colorscheme first
       vim.cmd.colorscheme("melange")
 
-      -- 2. Define the UI groups you want to be transparent
-      local transparent_groups = {
+      -- Semi-transparent glossy effect with actual transparency
+      local glossy_groups = {
          "Normal",        -- Main editor text
          "NormalNC",      -- Inactive windows
          "LineNr",        -- Line numbers
@@ -18,7 +18,15 @@ return {
          "FloatBorder"    -- Borders around floating windows
       }
 
-      -- 3. Loop through and clear the background for each group
+      -- Create actual transparent background for blur-capable GUIs/compositors
+      local transparent_groups = {
+         "Normal", "NormalNC", "LineNr", "CursorLineNr", "CursorColumn",
+         "FoldColumn", "SignColumn", "EndOfBuffer", "NonText",
+         "NormalFloat", "FloatBorder", "Pmenu", "PmenuSel",
+         "PmenuSbar", "PmenuThumb", "StatusLine", "StatusLineNC",
+         "TabLine", "TabLineSel", "TabLineFill",
+      }
+
       for _, group in ipairs(transparent_groups) do
          vim.cmd(string.format("hi %s guibg=NONE ctermbg=NONE", group))
       end

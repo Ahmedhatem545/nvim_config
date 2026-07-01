@@ -4,6 +4,19 @@ vim.opt.expandtab = true
 vim.opt.tabstop = 3
 vim.opt.softtabstop = 3
 vim.opt.shiftwidth = 3
+vim.opt.number = true
+vim.opt.termguicolors = true
+vim.opt.background = "dark"
+
+-- GUI / Neovide blur support
+if vim.g.neovide then
+   vim.g.neovide_transparency = 0.8
+   vim.g.neovide_background_color = "#11111180"
+   vim.g.neovide_floating_blur_amount_x = 6.0
+   vim.g.neovide_floating_blur_amount_y = 6.0
+   vim.g.neovide_floating_blur = true
+   vim.g.neovide_remember_window_size = true
+end
 
 -- Leaders
 vim.g.mapleader = " "
