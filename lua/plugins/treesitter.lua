@@ -4,7 +4,7 @@ return {
    lazy = false,
 
    config = function()
-      local ok, configs = pcall(require, "nvim-treesitter.config")
+      local ok, configs = pcall(require, "nvim-treesitter")
       if not ok then return end
 
       configs.setup({
@@ -13,23 +13,35 @@ return {
             "tsx",
             "typescript",
             "javascript",
+            "ecma",
+            "jsx",
             "svelte",
             "vue",
          },
          auto_install = true,
          sync_install = false,
+      })
 
-         highlight = {
-            enable = true,
-         },
+      local function attach_treesitter_highlighter(bufnr)
+         if vim.treesitter.highlighter.active[bufnr] then
+            return
+         end
+         local ft = vim.bo[bufnr].filetype
+         if ft == nil or ft == "" then
+            return
+         end
+         local ok, parser = pcall(vim.treesitter.get_parser, bufnr, ft)
+         if not ok or not parser then
+            return
+         end
+         pcall(vim.treesitter.highlighter.new, parser)
+      end
 
-         indent = {
-            enable = true,
-         },
-
-         autotag = {
-            enable = true,
-         },
+      vim.api.nvim_create_autocmd({"BufReadPost", "BufNewFile", "FileType"}, {
+         pattern = { "javascript", "typescript", "tsx", "jsx" },
+         callback = function(args)
+            attach_treesitter_highlighter(args.buf)
+         end,
       })
    end,
 }
