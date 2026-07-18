@@ -21,7 +21,7 @@ return {
 
       -- Define the servers you want to configure
       -- Changed 'tsserver' to 'ts_ls' to match the recent upstream rename
-      local servers = { "ts_ls", "solargraph", "html_ls", "lua_ls" }
+      local servers = { "ts_ls", "solargraph", "html_ls", "lua_ls", "dartls" }
       
       -- Loop through the servers and use the new Neovim 0.11+ native API
       for _, lsp in ipairs(servers) do

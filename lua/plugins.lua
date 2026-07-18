@@ -26,5 +26,6 @@ add("plugins.autotag")
 add("plugins.autoclose")
 add("plugins.indent-blankline")
 add("plugins.melange")
+add("plugins.flutter")
 add("bg.lua")
 return plugins

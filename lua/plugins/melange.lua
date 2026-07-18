@@ -1,22 +1,29 @@
 return {
-   "savq/melange-nvim",
+   "ellisonleao/gruvbox.nvim",
    lazy = false,
    priority = 1000,
    config = function()
-      -- Load the colorscheme first
-      vim.cmd.colorscheme("melange")
+      require('gruvbox').setup({
+         undercurl = true,
+         underline = true,
+         bold = true,
+         italic = {
+            strings = false,
+            comments = true,
+            operators = false,
+            folds = true,
+         },
+         -- gruvbox expects `inverse` as a boolean; don't pass a table
+         inverse = false,
+         invert_selection = false,
+         invert_signs = false,
+         invert_tabline = false,
+         contrast = "hard",
+         transparent_mode = true,
+      })
 
-      -- Semi-transparent glossy effect with actual transparency
-      local glossy_groups = {
-         "Normal",        -- Main editor text
-         "NormalNC",      -- Inactive windows
-         "LineNr",        -- Line numbers
-         "FoldColumn",    -- Fold markers
-         "SignColumn",    -- Gutter for git signs/diagnostics
-         "EndOfBuffer",   -- The empty space below the end of a file
-         "NormalFloat",   -- Floating windows (e.g., LSP popups)
-         "FloatBorder"    -- Borders around floating windows
-      }
+      -- Load the colorscheme
+      vim.cmd.colorscheme("gruvbox")
 
       -- Create actual transparent background for blur-capable GUIs/compositors
       local transparent_groups = {

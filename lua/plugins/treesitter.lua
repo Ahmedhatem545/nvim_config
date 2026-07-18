@@ -17,6 +17,7 @@ return {
             "jsx",
             "svelte",
             "vue",
+            "dart",
          },
          auto_install = true,
          sync_install = false,
@@ -38,7 +39,7 @@ return {
       end
 
       vim.api.nvim_create_autocmd({"BufReadPost", "BufNewFile", "FileType"}, {
-         pattern = { "javascript", "typescript", "tsx", "jsx" },
+            pattern = { "javascript", "typescript", "tsx", "jsx", "dart" },
          callback = function(args)
             attach_treesitter_highlighter(args.buf)
          end,
